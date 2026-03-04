@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boljoon Church | Discover Southern Cebu</title>
+
+<!-- Google Fonts & FontAwesome -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#f8f5f0;color:#333;line-height:1.7;scroll-behavior:smooth}
+
+/* ===== COLORS ===== */
+:root{
+--brown:#5a4a3a;
+--gold:#c9a66e;
+--cream:#f8f5f0;
+--shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* ===== HEADER ===== */
+header{
+background:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);position:sticky;top:0;z-index:100;
+}
+header .logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--brown);font-weight:700;}
+header nav a{margin-left:1.5rem;color:var(--brown);text-decoration:none;font-weight:500;transition:.3s}
+header nav a:hover{color:var(--gold)}
+
+/* ===== HERO ===== */
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.5)),url('title-bg.jpg') center/cover no-repeat fixed;
+display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:1rem;
+}
+.hero h1{font-family:'Playfair Display',serif;font-size:3.8rem;letter-spacing:2px;opacity:0;transform:translateY(40px);transition:all 1s ease;}
+.hero p{margin:1rem 0 2rem;font-size:1.4rem;opacity:0;transform:translateY(40px);transition:all 1s ease 0.3s;}
+.hero .btn{background:var(--gold);padding:1rem 2.2rem;border-radius:50px;color:white;text-decoration:none;font-weight:bold;transition:.3s;opacity:0;transform:translateY(40px);}
+.hero .btn:hover{background:#b8935e;transform:scale(1.05);}
+.hero.show h1,.hero.show p,.hero.show .btn{opacity:1;transform:translateY(0)}
+
+/* ===== SECTIONS ===== */
+.section{max-width:1200px;margin:5rem auto;padding:0 1.5rem;opacity:0;transform:translateY(40px);transition:all .8s ease}
+.section.show{opacity:1;transform:translateY(0)}
+.section h2{text-align:center;margin-bottom:3rem;color:var(--brown);font-size:2.5rem;letter-spacing:1px}
+
+/* ===== SLIDER ===== */
+.premium-slider{position:relative;height:450px;border-radius:15px;overflow:hidden;box-shadow:var(--shadow);}
+.premium-slider .slide{position:absolute;width:100%;height:100%;opacity:0;transition:opacity 1s ease;}
+.premium-slider .slide img{width:100%;height:100%;object-fit:cover;}
+.premium-slider .slide.active{opacity:1;z-index:2;}
+.premium-slider button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:white;border:none;padding:.5rem 1rem;font-size:1.8rem;cursor:pointer;border-radius:50%;z-index:3;transition:.3s}
+.premium-slider button:hover{background:var(--gold)}
+.premium-slider .prev{left:10px;}
+.premium-slider .next{right:10px;}
+.premium-slider .dots{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3;}
+.premium-slider .dots span{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);cursor:pointer;transition:.3s;}
+.premium-slider .dots span.active{background:var(--gold);transform:scale(1.2);}
+
+/* ===== GRID ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.card{background:white;padding:2.5rem;border-radius:15px;box-shadow:0 10px 25px rgba(0,0,0,.08);transition:.3s;text-align:center}
+.card:hover{transform:translateY(-10px);box-shadow:var(--shadow);}
+
+/* ===== VISIT INFO ===== */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.info-box{background:white;padding:2.5rem;border-radius:15px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1rem}
+.map iframe{width:100%;height:400px;border:0;border-radius:15px;box-shadow:var(--shadow);}
+
+/* ===== FORM ===== */
+form{background:white;padding:2.5rem;border-radius:15px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1rem}
+form input,form textarea{padding:.8rem;border:1px solid #ddd;border-radius:10px}
+form button{background:var(--gold);padding:.9rem;border:none;color:white;border-radius:50px;font-weight:bold;cursor:pointer;transition:.3s}
+form button:hover{background:#b8935e}
+
+/* ===== FOOTER ===== */
+footer{background:var(--brown);color:white;text-align:center;padding:1.5rem;margin-top:4rem;opacity:0;transform:translateY(40px);transition:.8s}
+footer.show{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+.hero h1{font-size:2.4rem}
+.hero p{font-size:1.1rem}
+.visit-grid{grid-template-columns:1fr}
+.premium-slider{height:300px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Boljoon Church</div>
+  <nav>
+    <a href="title.html">Home</a>
+    <a href="inside.html">Explore</a>
+    <a href="back.html">Contact Us</a>
+  </nav>
+</header>
+
+<section class="hero">
+<div>
+<h1>Discover Boljoon Church</h1>
+<p>A Timeless Spanish-Era Treasure in Southern Cebu</p>
+<a href="#visit" class="btn">Plan Your Visit</a>
+</div>
+</section>
+
+<section class="section">
+<h2>Photo Highlights</h2>
+<div class="premium-slider">
+<div class="slide active"><img src="DBC-bg.jpg"></div>
+<div class="slide"><img src="H2.jpg"></div>
+<div class="slide"><img src="H3.jpg"></div>
+<div class="slide"><img src="H4.jpg"></div>
+<div class="slide"><img src="cultural-architecture.jpg"></div>
+<div class="slide"><img src="mama-mary.jpg"></div>
+<div class="slide"><img src="mantos.jpg"></div>
+<div class="slide"><img src="pulpit-panels.jpg"></div>
+<div class="slide"><img src="piano.jpg"></div>
+<div class="slide"><img src="baptism.jpg"></div>
+<div class="slide"><img src="E-C.jpg"></div>
+<div class="slide"><img src="E-G-B.jpg"></div>  
+<div class="slide"><img src="H4.jpg"></div>
+<div class="slide"><img src="H5.jpg"></div>
+<div class="slide"><img src="H6.jpg"></div>
+<div class="slide"><img src="H7.jpg"></div>
+<div class="slide"><img src="H8.jpg"></div>
+<div class="slide"><img src="H9.jpg"></div>
+<div class="slide"><img src="H10.jpg"></div>
+<div class="slide"><img src="H11.jpg"></div>
+<div class="slide"><img src="H12.jpg"></div>
+<div class="slide"><img src="H13.jpg"></div>
+<button class="prev">&#10094;</button>  
+<button class="next">&#10095;</button>
+<div class="dots"></div>
+</div>
+</section>
+
+<section class="section visit-grid" id="visit">
+<div class="info-box">
+<h2>Plan Your Visit</h2>
+<div><strong>Location:</strong> Poblacion, Boljoon, Cebu</div>
+<div><strong>Open Daily:</strong> 5AM-7PM</div>
+<div><strong>Parish Museum:</strong> 9AM–5PM</div>
+<div><strong>Dress Code:</strong> Modest attire required</div>
+<div><strong>Facebook Page:</strong> Follow "The Archdiocesan Shrine of Nuestra Señora Patrocinio <br> de Maria Santisima"</div>
+</div>
+<div class="map">
+<iframe src="https://www.google.com/maps?q=Boljoon+Church+Cebu&output=embed"></iframe>
+</div>
+</section>
+
+<section class="section">
+<h2>Tour Inquiry</h2>
+<form>
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email Address" required>
+<input type="date" required>
+<textarea rows="4" placeholder="Message or Special Request"></textarea>
+<button type="submit">Send Inquiry</button>
+</form>
+</section>
+
+<footer>© 2026 Boljoon Church Tourism | A Heritage of Faith</footer>
+
+<script>
+/* HERO LOAD ANIMATION */
+window.addEventListener("load",()=>{
+  document.querySelector(".hero").classList.add("show");
+});
+
+/* INTERSECTION OBSERVER */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll(".section, footer").forEach(el=>{
+  observer.observe(el);
+});
+
+/* SLIDER */
+const slides=document.querySelectorAll(".slide");
+const dotsContainer=document.querySelector(".dots");
+let current=0;
+
+slides.forEach((_,i)=>{
+  const dot=document.createElement("span");
+  if(i===0) dot.classList.add("active");
+  dot.addEventListener("click",()=>showSlide(i));
+  dotsContainer.appendChild(dot);
+});
+
+const dots=document.querySelectorAll(".dots span");
+
+function showSlide(index){
+  slides.forEach((s,i)=>{
+    s.classList.remove("active");
+    dots[i].classList.remove("active");
+  });
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+  current=index;
+}
+
+setInterval(()=>{
+  showSlide((current+1)%slides.length);
+},4000);
+
+document.querySelector(".prev").onclick=()=>showSlide((current-1+slides.length)%slides.length);
+document.querySelector(".next").onclick=()=>showSlide((current+1)%slides.length);
+</script>
+
+</body>
+</html>

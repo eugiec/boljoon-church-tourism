@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boljoon Church | Explore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+:root{
+--warm-brown:#5a4a3a;
+--golden-accent:#c9a66e;
+--cream-bg:#f8f5f0;
+--soft-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:var(--cream-bg);
+color:#2d2d2d;
+line-height:1.7;
+overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+header{
+position:sticky;
+top:0;
+background:white;
+box-shadow:var(--soft-shadow);
+padding:1.2rem 0;
+z-index:1000;
+text-align:center;
+}
+
+.page-title{
+font-family:'Playfair Display',serif;
+font-size:2rem;
+color:var(--warm-brown);
+}
+
+.nav-buttons{
+margin-top:0.8rem;
+display:flex;
+justify-content:center;
+gap:3rem;
+}
+
+.nav-buttons a{
+text-decoration:none;
+color:var(--warm-brown);
+font-weight:500;
+position:relative;
+}
+
+.nav-buttons a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-5px;
+width:0%;
+height:2px;
+background:var(--golden-accent);
+transition:0.3s;
+}
+
+.nav-buttons a:hover::after{
+width:100%;
+}
+
+/* ================= HERO ================= */
+.hero{
+height:95vh;
+background:url('land&sea.jpg') center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+position:relative;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.75));
+}
+
+.hero-content{
+position:relative;
+z-index:1;
+}
+
+.hero h2,
+.hero p,
+.hero button{
+opacity:0;
+transform:translateY(40px);
+}
+
+.hero h2{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.2rem,4vw,3.8rem);
+margin-bottom:1rem;
+transition:all 1s ease;
+}
+
+.hero p{
+transition:all 1s ease 0.3s;
+}
+
+.hero button{
+margin-top:2rem;
+padding:0.8rem 2rem;
+background:var(--golden-accent);
+border:none;
+color:white;
+border-radius:30px;
+cursor:pointer;
+transition:all 0.4s ease 0.6s;
+}
+
+.hero button:hover{
+background:#b89355;
+transform:translateY(-3px);
+}
+
+.hero.show h2,
+.hero.show p,
+.hero.show button{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ================= SECTION TITLE ================= */
+.section-title{
+text-align:center;
+margin-bottom:3rem;
+}
+
+.section-title h2{
+font-family:'Playfair Display',serif;
+font-size:2.3rem;
+color:var(--warm-brown);
+margin-bottom:0.5rem;
+}
+
+.section-title p{
+color:#777;
+}
+
+/* ================= GRID ================= */
+.content-wrapper{
+max-width:1200px;
+margin:5rem auto;
+padding:0 1.5rem;
+}
+
+.image-card-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:2rem;
+}
+
+.image-card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:var(--soft-shadow);
+transition:all 0.6s ease;
+cursor:pointer;
+opacity:0;
+transform:translateY(40px);
+}
+
+.image-card:hover{
+transform:translateY(-10px);
+}
+
+.card-img{
+width:100%;
+height:230px;
+object-fit:cover;
+}
+
+.card-content{
+padding:1.5rem;
+}
+
+.card-content h2{
+font-family:'Playfair Display',serif;
+color:var(--warm-brown);
+margin-bottom:1rem;
+}
+
+.show{
+opacity:1 !important;
+transform:translateY(0) !important;
+}
+
+/* ================= LIGHTBOX ================= */
+.lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:80vh;
+object-fit:contain;
+border-radius:10px;
+}
+
+.lightbox.active{
+display:flex;
+}
+
+/* ================= FOOTER ================= */
+footer{
+background:#2f2a25;
+color:#ddd;
+text-align:center;
+padding:2rem;
+margin-top:4rem;
+opacity:0;
+transform:translateY(40px);
+transition:all 0.9s ease;
+}
+
+/* Mobile */
+@media(max-width:768px){
+.page-title{
+font-size:1.5rem;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="page-title">Explore Boljoon Church</div>
+<div class="nav-buttons">
+<a href="title.html">Home</a>
+<a href="inside.html">Explore</a>
+<a href="back.html">Contact Us</a>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h2>Where Faith Meets the Sea</h2>
+<p>Discover Cebu’s timeless heritage</p>
+<button onclick="document.querySelector('.content-wrapper').scrollIntoView({behavior:'smooth'})">
+Explore More
+</button>
+</div>
+</section>
+
+<div class="content-wrapper">
+
+<div class="section-title">
+<h2>Historic Treasures of Boljoon</h2>
+<p>Explore the sacred landmarks and centuries-old artifacts of this heritage church</p>
+</div>
+
+<div class="image-card-grid">
+<!-- Keep your existing image cards here exactly as before -->
+<div class="image-card">
+<img src="title-bg.jpg" class="card-img">
+<div class="card-content">
+<h2>Centuries of History</h2>
+<p>Founded in 1599 by Augustinian missionaries, this coral-stone church doubled as a fortress against pirate raids. Declared a <strong>National Cultural Treasure</strong> in 1999, it remains a testament to Cebu’s colonial past.</p>
+</div>
+</div>
+
+<div class="image-card">
+<img src="cultural-architecture.jpg" class="card-img">
+<div class="card-content">
+<h2>Colonial Architecture</h2>
+<p>Featuring 3-meter-thick walls, a bell tower-watchtower hybrid, and hand-carved woodwork. Restored murals depict biblical scenes painted by local artisans in the early 1900s.</p>
+</div>
+</div>
+
+<div class="image-card">
+<img src="mama-mary.jpg" class="card-img">
+<div class="card-content">
+<h2>The Patroness</h2>
+<p>The 16th-century image of Nuestra Señora Patrocinio de Maria Santisima is adorned with silver regalia. Its feast day on <strong>September 8</strong> draws thousands of pilgrims yearly.</p>
+</div>
+</div>
+
+ <div class="image-card">
+<img src="mantos.jpg" class="card-img">
+<div class="card-content">
+<h2>Sacred Vestments (Mantos)</h2>
+<p>These are intricately embroidered silk and gold-thread gowns used to clothe the miraculous 400-year-old ivory image of the patroness.</p>
+</div>
+</div>
+  
+<div class="image-card">
+<img src="pulpit-panels_1.jpg" class="card-img">
+<div class="card-content">
+<h2>Pulpit Panels</h2>
+<p>The Boljoon pulpit panels are 19th-century tindalo wood carvings depicting Augustinian saints that were recently returned to their home in Cebu after being missing for over three decades.</p>
+</div>
+</div>
+
+<div class="image-card">
+<img src="piano.jpg" class="card-img">
+<div class="card-content">
+<h2>The Pipe Organ</h2>
+<p>The pipe organ of the Patrocinio de Maria Parish Church in Boljoon, Cebu, is a fully functional Spanish colonial instrument built around 1880 and restored in 2018 by Diego Cera Organ Builders.</p>
+</div>
+</div>
+
+<div class="image-card">
+<img src="baptism.jpg" class="card-img">
+<div class="card-content">
+<h2>Old Baptistery</h2>
+<p>This centuries-old room is a designated space for the sacrament of baptism, which, in the Roman Catholic tradition, signifies an individual becoming a member of the faith.</p>
+</div>
+</div>
+
+<div class="image-card">
+<img src="E-C.jpg" class="card-img">
+<div class="card-content">
+<h2>Escuela Catolica</h2>
+<p>The Escuela Catolica is a 1940s heritage landmark in Boljoon, Cebu, distinguished by its iconic twin staircases and its history as a religious school and dormitory.</p>
+</div>
+</div>
+
+<div class="image-card">
+<img src="E-G-B.jpg" class="card-img">
+<div class="card-content">
+<h2>El Gran Baluarte</h2>
+<p>The El Gran Baluarte holds a unique history that goes beyond its role as a fortress, particularly through its "prison art" and the leadership of its builder.</p>
+</div>
+</div>
+  
+</div>
+</div>
+
+<div class="lightbox" id="lightbox">
+<img src="">
+</div>
+
+<footer>
+© 2026 Boljoon Church Tourism | A Heritage of Faith
+</footer>
+
+<script>
+
+/* HERO CINEMATIC LOAD */
+window.addEventListener("load",()=>{
+document.querySelector(".hero").classList.add("show");
+});
+
+/* Lightbox */
+const cards = document.querySelectorAll(".image-card img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = lightbox.querySelector("img");
+
+cards.forEach(img=>{
+img.addEventListener("click",()=>{
+lightbox.classList.add("active");
+lightboxImg.src = img.src;
+});
+});
+
+lightbox.addEventListener("click",()=>{
+lightbox.classList.remove("active");
+});
+
+/* Scroll animation */
+const animatedElements = document.querySelectorAll(".image-card, footer");
+
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}else{
+entry.target.classList.remove("show");
+}
+});
+},{threshold:0.15});
+
+animatedElements.forEach(el=>{
+observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>
